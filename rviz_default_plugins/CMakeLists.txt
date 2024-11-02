@@ -417,7 +417,7 @@ if(BUILD_TESTING)
 
   ament_add_gmock(marker_test
     test/rviz_default_plugins/displays/marker/markers/arrow_marker_test.cpp
-    # TODO: Add arrow strip marker test
+    test/rviz_default_plugins/displays/marker/markers/arrow_strip_marker_test.cpp
     test/rviz_default_plugins/displays/marker/markers/line_marker_test.cpp
     test/rviz_default_plugins/displays/marker/markers/mesh_resource_marker_test.cpp
     test/rviz_default_plugins/displays/marker/markers/points_marker_test.cpp

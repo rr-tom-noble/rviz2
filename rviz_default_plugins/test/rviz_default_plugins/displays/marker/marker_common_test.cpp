@@ -80,7 +80,7 @@ public:
 visualization_msgs::msg::Marker::SharedPtr createSharedPtrMessage(
   int32_t action, int32_t type, int id = 0)
 {
-  auto marker = createMessageWithPoints(type);
+  auto marker = createMessageWithTwoPoints(type);
   marker.action = action;
   marker.id = id;
   return std::make_shared<visualization_msgs::msg::Marker>(marker);

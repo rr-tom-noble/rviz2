@@ -60,6 +60,24 @@ void assertArrowWithTransform(
   EXPECT_THAT(arrow_scene_node->getOrientation(), QuaternionEq(orientation));
 }
 
+void assertAllArrowsWithTransform(
+  Ogre::SceneManager * scene_manager,
+  Ogre::Vector3 position,
+  Ogre::Vector3 scale,
+  Ogre::Quaternion orientation)
+{
+  auto arrow_scene_nodes = findAllArrows(scene_manager->getRootSceneNode());
+  ASSERT_FALSE(arrow_scene_nodes.empty());
+  for (auto arrow_node : arrow_scene_nodes)
+  {
+    ASSERT_TRUE(arrow_node);
+    EXPECT_THAT(arrow_node->getPosition(), Vector3Eq(position));
+    // Have to mangle the scale because of the default orientation of the cylinders (see arrow.cpp).
+    EXPECT_THAT(arrow_node->getScale(), Vector3Eq(Ogre::Vector3(scale.z, scale.x, scale.y)));
+    EXPECT_THAT(arrow_node->getOrientation(), QuaternionEq(orientation));
+  }
+}
+
 bool axesAreVisible(Ogre::SceneNode * scene_node)
 {
   bool axes_are_visible = true;
@@ -80,6 +98,23 @@ bool arrowIsVisible(Ogre::SceneNode * scene_node)
     scene_node, "rviz_cylinder.mesh");
 
   return arrow_head->isVisible() && arrow_shaft->isVisible();
+}
+
+bool noArrowsAreVisible(Ogre::SceneNode * scene_node)
+{
+  auto arrow_heads = findAllEntitiesByMeshName(scene_node, "rviz_cone.mesh");
+  auto arrow_shafts = findAllEntitiesByMeshName(scene_node, "rviz_cylinder.mesh");
+  for (const auto & arrow_head : arrow_heads) {
+    if (arrow_head->isVisible()) {
+      return false;
+    }
+  }
+  for (const auto & arrow_shaft : arrow_shafts) {
+    if (arrow_shaft->isVisible()) {
+      return false;
+    }
+  }
+  return true;
 }
 
 std::vector<Ogre::Entity *> findAllEntitiesByMeshName(
