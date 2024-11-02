@@ -2,6 +2,152 @@
 Changelog for package rviz_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+14.3.1 (2024-10-11)
+-------------------
+* Handle time source exception (`#1285 <https://github.com/ros2/rviz/issues/1285>`_)
+* Contributors: Matthew Foran
+
+14.3.0 (2024-10-03)
+-------------------
+
+14.2.6 (2024-08-28)
+-------------------
+* Fully handle `Tool::processKeyEvent` return value (`#1270 <https://github.com/ros2/rviz/issues/1270>`_)
+* Handle `Tool::Finished` returned by `processKeyEvent` (`#1257 <https://github.com/ros2/rviz/issues/1257>`_)
+* Contributors: Patrick Roncagliolo
+
+14.2.5 (2024-07-29)
+-------------------
+* Added more time to copyright on Windwos (`#1252 <https://github.com/ros2/rviz/issues/1252>`_)
+* Added common test for rviz_common (`#1232 <https://github.com/ros2/rviz/issues/1232>`_)
+* Set ContentsMargins for RenderPanel to 0 to avoid borders in fullscreen mode. Fixes `#1024 <https://github.com/ros2/rviz/issues/1024>`_ (`#1228 <https://github.com/ros2/rviz/issues/1228>`_)
+* Contributors: Alejandro Hernández Cordero, Bo Chen
+
+14.2.4 (2024-07-19)
+-------------------
+* Updated deprecated message filter headers (`#1239 <https://github.com/ros2/rviz/issues/1239>`_)
+* Correclty load icons of panels with whitespaces in their name (`#1241 <https://github.com/ros2/rviz/issues/1241>`_)
+* Contributors: Alejandro Hernández Cordero, Patrick Roncagliolo
+
+14.2.3 (2024-06-25)
+-------------------
+
+14.2.2 (2024-06-17)
+-------------------
+* Prepping for qos deprecation (`#1214 <https://github.com/ros2/rviz/issues/1214>`_)
+* Replace ESC shortcut for exiting full screen with solution from https://github.com/ros-visualization/rviz/pull/1416 (`#1205 <https://github.com/ros2/rviz/issues/1205>`_)
+* Contributors: Lucas Wendland, Michael Ripperger
+
+14.2.1 (2024-05-24)
+-------------------
+
+14.2.0 (2024-04-26)
+-------------------
+
+14.1.0 (2024-04-16)
+-------------------
+* Update to yaml-cpp 0.8.0 (`#1183 <https://github.com/ros2/rviz/issues/1183>`_)
+  yaml-cpp 0.8.0 has a proper CMake target, i.e. yaml-cpp::yaml-cpp.
+  Use that here.
+* Contributors: Chris Lalancette
+
+14.0.0 (2024-04-07)
+-------------------
+
+13.4.2 (2024-03-27)
+-------------------
+
+13.4.1 (2024-03-26)
+-------------------
+* Remove regex_filter_property.hpp from the moc lines. (`#1172 <https://github.com/ros2/rviz/issues/1172>`_)
+  Since it has no SLOTS or SIGNALS, we don't need to run
+  MOC on it.  That will both speed up the compilation and
+  remove a warning when building.
+* Added regex filter field for TF display (`#1032 <https://github.com/ros2/rviz/issues/1032>`_)
+* Contributors: Alejandro Hernández Cordero, Chris Lalancette
+
+13.4.0 (2024-03-09)
+-------------------
+* Fix camera display overlay (`#1151 <https://github.com/ros2/rviz/issues/1151>`_)
+* Fixes for uncrustify 0.78. (`#1155 <https://github.com/ros2/rviz/issues/1155>`_)
+  Mostly what we do here is to disable the indentation on
+  certain constructs that are different between 0.72 and
+  0.78.  It isn't my preferred solution, but since it only
+  affects a small amount of code (and most of that in macros),
+  this seems acceptable to me.
+* Contributors: Alejandro Hernández Cordero, Chris Lalancette
+
+13.3.1 (2024-01-24)
+-------------------
+* Append measured subscription frequency to topic status (`#1113 <https://github.com/ros2/rviz/issues/1113>`_)
+* Contributors: Yadu
+
+13.3.0 (2023-12-26)
+-------------------
+* Implement reset time service (`#1109 <https://github.com/ros2/rviz/issues/1109>`_)
+* Add "R" key as shortcut for resetTime (`#1088 <https://github.com/ros2/rviz/issues/1088>`_)
+* Add fullscreen startup option (`#1097 <https://github.com/ros2/rviz/issues/1097>`_)
+* Switch to target_link_libraries. (`#1098 <https://github.com/ros2/rviz/issues/1098>`_)
+* Initialize more of the visualization_manager members. (`#1090 <https://github.com/ros2/rviz/issues/1090>`_)
+* Explicit time conversions and comparisons (`#1087 <https://github.com/ros2/rviz/issues/1087>`_)
+* Rolling namespace in title (`#1074 <https://github.com/ros2/rviz/issues/1074>`_)
+* Contributors: AiVerisimilitude, Chris Lalancette, Hyunseok, Markus Bader, Paul Erik Frivold
+
+13.2.0 (2023-11-06)
+-------------------
+
+13.1.2 (2023-10-09)
+-------------------
+
+13.1.1 (2023-10-04)
+-------------------
+
+13.1.0 (2023-09-07)
+-------------------
+* Removed unused code (`#1044 <https://github.com/ros2/rviz/issues/1044>`_)
+* Contributors: Alejandro Hernández Cordero
+
+13.0.0 (2023-08-21)
+-------------------
+* Remove unused LineEditWithButton::simulateReturnPressed() (`#1040 <https://github.com/ros2/rviz/issues/1040>`_)
+* Contributors: Alejandro Hernández Cordero
+
+12.8.0 (2023-08-27)
+-------------------
+* Remove warning in depth_cloud_mld.cpp (`#1021 <https://github.com/ros2/rviz/issues/1021>`_)
+* Added DepthCloud default plugin (`#996 <https://github.com/ros2/rviz/issues/996>`_)
+* Stop inheriting from std::iterator. (`#1013 <https://github.com/ros2/rviz/issues/1013>`_)
+  In C++17, inheriting from std::iterator has been
+  deprecated: https://www.fluentcpp.com/2018/05/08/std-iterator-deprecated/
+  Here, switch away from inheriting and just define the
+  interface ourselves (which is the current recommended best practice).
+  This removes some warnings when building with gcc 13.1.1
+* Contributors: Alejandro Hernández Cordero, Chris Lalancette
+
+12.7.0 (2023-07-11)
+-------------------
+* use static QCoreApplication::processEvents() function without a QApplication instance (`#924 <https://github.com/ros2/rviz/issues/924>`_)
+* Re-implemented setName for tools (`#989 <https://github.com/ros2/rviz/issues/989>`_)
+* Contributors: Felix Exner (fexner), Yannis Gerlach
+
+12.6.1 (2023-06-12)
+-------------------
+* Add a libqt5-svg dependency to rviz_common. (`#992 <https://github.com/ros2/rviz/issues/992>`_)
+* Contributors: Chris Lalancette
+
+12.6.0 (2023-06-07)
+-------------------
+* Remove onHelpWiki. (`#985 <https://github.com/ros2/rviz/issues/985>`_)
+* Contributors: Chris Lalancette
+
+12.5.1 (2023-05-11)
+-------------------
+* Clean Code (`#975 <https://github.com/ros2/rviz/issues/975>`_)
+* Contributors: mosfet80
+
+12.5.0 (2023-04-28)
+-------------------
+
 12.4.0 (2023-04-18)
 -------------------
 

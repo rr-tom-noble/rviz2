@@ -1,31 +1,32 @@
-/*
- * Copyright (c) 2017, Open Source Robotics Foundation, Inc.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Willow Garage, Inc. nor the names of its
- *       contributors may be used to endorse or promote products derived from
- *       this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
+// Copyright (c) 2017, Open Source Robotics Foundation, Inc.
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+//    * Redistributions of source code must retain the above copyright
+//      notice, this list of conditions and the following disclaimer.
+//
+//    * Redistributions in binary form must reproduce the above copyright
+//      notice, this list of conditions and the following disclaimer in the
+//      documentation and/or other materials provided with the distribution.
+//
+//    * Neither the name of the copyright holder nor the names of its
+//      contributors may be used to endorse or promote products derived from
+//      this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
 
 // This class is based on the Ogre documentation's recommendation on how to use with Qt5:
 //
@@ -155,9 +156,6 @@ ToString(const EnumType & enumValue)
 bool
 RenderWindow::event(QEvent * event)
 {
-  // qDebug() <<
-  //   "[" << QTime::currentTime().toString("HH:mm:ss:zzz") << "]:" <<
-  //   "event->type() ==" << ToString(event->type());
   switch (event->type()) {
     case QEvent::Resize:
       if (this->isExposed()) {
@@ -170,7 +168,6 @@ RenderWindow::event(QEvent * event)
     case QEvent::Type::MouseMove:
     case QEvent::Type::MouseButtonPress:
     case QEvent::Type::MouseButtonRelease:
-      // case QEvent::Type::MouseButtonRelease:
       if (on_mouse_events_callback_) {
         on_mouse_events_callback_(static_cast<QMouseEvent *>(event));
       }
@@ -184,7 +181,6 @@ RenderWindow::event(QEvent * event)
       QWindow::event(event);
       return false;
   }
-  // return QWindow::event(event);
 }
 
 void
@@ -198,35 +194,19 @@ RenderWindow::exposeEvent(QExposeEvent * expose_event)
   }
 }
 
-// bool
-// RenderWindow::eventFilter(QObject * target, QEvent * event)
-// {
-//   // if (target == this) {
-//   //   qDebug() <<
-//   //     "[" << QTime::currentTime().toString("HH:mm:ss:zzz") << "]:" <<
-//   //     "event->type() ==" << ToString(event->type()) <<
-//   //     "target ==" << target;
-//   //   switch (event->type()) {
-//   //     case QEvent::Resize:
-//   //       if (this->isExposed()) {
-//   //         impl_->resize(this->width(), this->height());
-//   //       }
-//   //       return false;
-//   //     case QEvent::UpdateRequest:
-//   //       this->renderNow();
-//   //       return true;
-//   //     default:
-//   //       return QWindow::event(event);
-//   //   }
-//   // }
-//   QWindow::eventFilter(target, event);
-//   return false;
-// }
 
 void
 RenderWindowOgreAdapter::setOgreCamera(RenderWindow * render_window, Ogre::Camera * ogre_camera)
 {
   render_window->impl_->setCamera(ogre_camera);
+}
+
+void
+RenderWindowOgreAdapter::setSceneNodeCamera(
+  RenderWindow * render_window,
+  Ogre::SceneNode * ogre_camera)
+{
+  render_window->impl_->setSceneNodeCamera(ogre_camera);
 }
 
 Ogre::Camera *
