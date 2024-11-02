@@ -60,24 +60,6 @@ void assertArrowWithTransform(
   EXPECT_THAT(arrow_scene_node->getOrientation(), QuaternionEq(orientation));
 }
 
-void assertAllArrowsWithTransform(
-  Ogre::SceneManager * scene_manager,
-  Ogre::Vector3 position,
-  Ogre::Vector3 scale,
-  Ogre::Quaternion orientation)
-{
-  auto arrow_scene_nodes = findAllArrows(scene_manager->getRootSceneNode());
-  ASSERT_FALSE(arrow_scene_nodes.empty());
-  for (auto arrow_node : arrow_scene_nodes)
-  {
-    ASSERT_TRUE(arrow_node);
-    EXPECT_THAT(arrow_node->getPosition(), Vector3Eq(position));
-    // Have to mangle the scale because of the default orientation of the cylinders (see arrow.cpp).
-    EXPECT_THAT(arrow_node->getScale(), Vector3Eq(Ogre::Vector3(scale.z, scale.x, scale.y)));
-    EXPECT_THAT(arrow_node->getOrientation(), QuaternionEq(orientation));
-  }
-}
-
 bool axesAreVisible(Ogre::SceneNode * scene_node)
 {
   bool axes_are_visible = true;
