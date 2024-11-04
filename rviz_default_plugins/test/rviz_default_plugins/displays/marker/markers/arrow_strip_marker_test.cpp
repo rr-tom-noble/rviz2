@@ -82,7 +82,7 @@ TEST_F(MarkersTestFixture, setMessage_sets_positions_and_orientations_correctly)
   EXPECT_THAT(marker_->getPosition(), Vector3Eq(Ogre::Vector3(0, 1, 0)));
   EXPECT_THAT(marker_->getOrientation(), QuaternionEq(Ogre::Quaternion(0, 0, 1, 0)));
 
-  rviz_default_plugins::assertArrowsWithTransform(
+  rviz_default_plugins::assertArrowWithTransform(
     scene_manager_, default_arrow_position_, default_arrow_scale_, default_arrow_orientation_);
 }
 
@@ -110,7 +110,7 @@ TEST_F(MarkersTestFixture, setMessage_sets_positions_and_orientations_from_two_p
   EXPECT_THAT(marker_->getOrientation(), QuaternionEq(Ogre::Quaternion(0, 0, 1, 0)));
 
   rviz_default_plugins::assertArrowWithTransform(
-    scene_manager_, first_point, expected_arrow_scale, expected_arrow_orientation);
+    scene_manager_, p1, expected_arrow_scale, expected_arrow_orientation);
 }
 
 TEST_F(MarkersTestFixture, setMessage_sets_positions_and_orientations_from_three_points_correctly) {
@@ -120,15 +120,15 @@ TEST_F(MarkersTestFixture, setMessage_sets_positions_and_orientations_from_three
   auto message = createMessageWithThreePoints(visualization_msgs::msg::Marker::ARROW_STRIP);
   marker_->setMessage(message);
 
-  auto first_point = Ogre::Vector3(
+  auto p1 = Ogre::Vector3(
     message.points[0].x, message.points[0].y, message.points[0].z);
-  auto second_point = Ogre::Vector3(
+  auto p2 = Ogre::Vector3(
     message.points[1].x, message.points[1].y, message.points[1].z);
-  auto third_point = Ogre::Vector3(
+  auto p3 = Ogre::Vector3(
     message.points[2].x, message.points[2].y, message.points[2].z);
 
-  auto d1 = second_point - first_point;
-  auto d2 = third_point - second_point;
+  auto d1 = p2 - p1;
+  auto d2 = p3 - p2;
 
   d1.normalise();
   d2.normalise();
