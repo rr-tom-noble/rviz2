@@ -74,12 +74,21 @@ void assertArrowWithTransform(
   Ogre::Vector3 scale,
   Ogre::Quaternion orientation);
 
+bool axesAreVisible(Ogre::SceneNode * scene_node);
+
+bool arrowIsVisible(Ogre::SceneNode * scene_manager);
+
+bool noArrowsAreVisible(Ogre::SceneNode * scene_manager);
+
+std::vector<Ogre::SceneNode *> findAllArrows(Ogre::SceneNode * scene_node);
+Ogre::SceneNode * findOneArrow(Ogre::SceneNode * scene_node);
+
 template <int N>
 void assertArrowsWithTransforms(
   Ogre::SceneManager * scene_manager,
   std::array<Ogre::Vector3, N> positions,
   std::array<Ogre::Vector3, N> scales,
-  std::array<Ogre::Quaternion, N> orientations,
+  std::array<Ogre::Quaternion, N> orientations
 ) {
   auto arrow_scene_nodes = findAllArrows(scene_manager->getRootSceneNode());
   ASSERT_EQ(arrow_scene_nodes.size(), N);
@@ -92,15 +101,6 @@ void assertArrowsWithTransforms(
     EXPECT_THAT(arrow_node->getOrientation(), QuaternionEq(orientations.at(i)));
   }
 }
-
-bool axesAreVisible(Ogre::SceneNode * scene_node);
-
-bool arrowIsVisible(Ogre::SceneNode * scene_manager);
-
-bool noArrowsAreVisible(Ogre::SceneNode * scene_manager);
-
-std::vector<Ogre::SceneNode *> findAllArrows(Ogre::SceneNode * scene_node);
-Ogre::SceneNode * findOneArrow(Ogre::SceneNode * scene_node);
 
 std::vector<Ogre::SceneNode *> findAllAxes(Ogre::SceneNode * scene_node);
 Ogre::SceneNode * findOneAxes(Ogre::SceneNode * scene_node);
