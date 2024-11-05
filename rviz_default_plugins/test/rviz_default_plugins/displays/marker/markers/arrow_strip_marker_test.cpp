@@ -143,9 +143,9 @@ TEST_F(MarkersTestFixture, setMessage_sets_positions_and_orientations_from_three
   EXPECT_THAT(marker_->getPosition(), Vector3Eq(Ogre::Vector3(0, 1, 0)));
   EXPECT_THAT(marker_->getOrientation(), QuaternionEq(Ogre::Quaternion(0, 0, 1, 0)));
   
-  auto expected_arrow_points = {p1, p2};
-  auto expected_arrow_orientations = {q1, q2};
-  auto expected_arrow_scales = {expected_arrow_scale, expected_arrow_scale};
+  std::array<Ogre::Vector3, 2> expected_arrow_points = {p1, p2};
+  std::array<Ogre::Quaternion, 2> expected_arrow_orientations = {q1, q2};
+  std::array<Ogre::Vector3, 2> expected_arrow_scales = {expected_arrow_scale, expected_arrow_scale};
 
   rviz_default_plugins::assertArrowsWithTransforms<2>(
     scene_manager_, expected_arrow_points, expected_arrow_scales, expected_arrow_orientations);
