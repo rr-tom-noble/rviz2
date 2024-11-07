@@ -62,7 +62,7 @@ TEST_F(MarkersTestFixture, setMessage_makes_arrow_strip_invisible_if_invalid_tra
   EXPECT_TRUE(rviz_default_plugins::noArrowsAreVisible(scene_manager_->getRootSceneNode()));
 }
 
-TEST_F(MarkersTestFixture, incomplete_message_sets_scene_node_to_not_visible) {
+TEST_F(MarkersTestFixture, incomplete_message_sets_arrow_strp_to_not_visible) {
   marker_ = makeMarker<rviz_default_plugins::displays::markers::ArrowStripMarker>();
 
   auto incomplete_message = createMessageWithTwoPoints(visualization_msgs::msg::Marker::ARROW_STRIP);
