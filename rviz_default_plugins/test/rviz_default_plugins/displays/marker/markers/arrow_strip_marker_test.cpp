@@ -53,7 +53,7 @@ const auto default_arrow_orientation_ = Ogre::Quaternion(0.5f, -0.5f, -0.5f, -0.
 const auto default_arrow_position_ = Ogre::Vector3(0, 0, 0);
 const auto default_arrow_scale_ = Ogre::Vector3(1, 0.2f, 0.2f);
 
-TEST_F(MarkersTestFixture, setMessage_makes_the_scene_node_invisible_if_invalid_transform) {
+TEST_F(MarkersTestFixture, setMessage_makes_arrow_strip_invisible_if_invalid_transform) {
   marker_ = makeMarker<rviz_default_plugins::displays::markers::ArrowStripMarker>();
   EXPECT_CALL(*frame_manager_, transform(_, _, _, _, _)).WillOnce(Return(false));  // NOLINT
 
@@ -73,7 +73,7 @@ TEST_F(MarkersTestFixture, incomplete_message_sets_scene_node_to_not_visible) {
   EXPECT_TRUE(rviz_default_plugins::noArrowsAreVisible(scene_manager_->getRootSceneNode()));
 }
 
-TEST_F(MarkersTestFixture, setMessage_sets_positions_and_orientations_correctly) {
+TEST_F(MarkersTestFixture, setMessage_sets_arrow_strip_positions_and_orientations_correctly) {
   marker_ = makeMarker<rviz_default_plugins::displays::markers::ArrowStripMarker>();
   mockValidTransform();
 
@@ -86,7 +86,7 @@ TEST_F(MarkersTestFixture, setMessage_sets_positions_and_orientations_correctly)
     scene_manager_, default_arrow_position_, default_arrow_scale_, default_arrow_orientation_);
 }
 
-TEST_F(MarkersTestFixture, setMessage_sets_positions_and_orientations_from_two_points_correctly) {
+TEST_F(MarkersTestFixture, setMessage_sets_arrow_strip_positions_and_orientations_from_two_points_correctly) {
   marker_ = makeMarker<rviz_default_plugins::displays::markers::ArrowStripMarker>();
   mockValidTransform();
 
@@ -113,7 +113,7 @@ TEST_F(MarkersTestFixture, setMessage_sets_positions_and_orientations_from_two_p
     scene_manager_, p1, expected_arrow_scale, expected_arrow_orientation);
 }
 
-TEST_F(MarkersTestFixture, setMessage_sets_positions_and_orientations_from_three_points_correctly) {
+TEST_F(MarkersTestFixture, setMessage_sets_arrow_strip_positions_and_orientations_from_three_points_correctly) {
   marker_ = makeMarker<rviz_default_plugins::displays::markers::ArrowStripMarker>();
   mockValidTransform();
 
@@ -151,7 +151,7 @@ TEST_F(MarkersTestFixture, setMessage_sets_positions_and_orientations_from_three
     scene_manager_, expected_arrow_points, expected_arrow_scales, expected_arrow_orientations);
 }
 
-TEST_F(MarkersTestFixture, setMessage_ignores_old_message) {
+TEST_F(MarkersTestFixture, setMessage_arrow_strip_ignores_old_message) {
   marker_ = makeMarker<rviz_default_plugins::displays::markers::ArrowStripMarker>();
   mockValidTransform();
 
